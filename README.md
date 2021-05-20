@@ -1,2 +1,2 @@
 # crypto-exchange-buddy
-My Dapp for 0xhack bounties.
+My DApp for 0xhack bounties.
