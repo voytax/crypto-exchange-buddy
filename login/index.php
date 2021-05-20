@@ -10,6 +10,13 @@
 		<main>
 			<h1>Log in</h1><br>
 			<div class="form">
+				<?php
+					session_start();
+					if (isset($_SESSION["register"])) {
+						echo("<p>Registered correctly! Please log in</p>");
+						unset($_SESSION["register"]);
+					}
+				 ?>
         <form name="login" method="post">
           <label for="email">Email: <input type="text" name="email"></label><br>
           <label for="password">Password: <input type="password" name="pwd"></label><br>
@@ -32,7 +39,9 @@
                 $row = mysqli_fetch_assoc($result);
                 $hashedPwd = $row["password"];
                 if (password_verify($password, $hashedPwd)) {
-                  header("localhost/profile/");
+									session_start();
+									$_SESSION["login"] = $email;
+                  header("Location: ../profile/");
                   exit;
                 } else {
                   echo("Password doesn't match");

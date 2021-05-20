@@ -81,6 +81,7 @@
 						<div id="error_report"></div>
 						<?php
 							if (isset($_POST['register'])) {
+								session_start();
 								$email = escapeSQL($_POST["email"]);
 								$name = escapeSQL($_POST["name"]);
 								$surname = escapeSQL($_POST["surname"]);
@@ -96,7 +97,8 @@
 									if (!mysqli_query(getDbConnection(), $query)) {
 										echo("Sorry! Something went wrong :/<br>");
 									} else {
-										echo("Registered correctly!");
+										$_SESSION["register"] = "Registered correctly!";
+										header("Location: ../login/");
 									}
 								} else {
 									echo("User with that email address already exist!");
